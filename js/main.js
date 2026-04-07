@@ -1,6 +1,6 @@
 const GITHUB_USERNAME = "Jordi098";
 // NOTE: This token is read-only and only has access to public data. It can be safely used in client-side code.
-const GITHUB_TOKEN = "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";
+const GITHUB_TOKEN = "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";
 
 const SKILLS = {
     frontend: [

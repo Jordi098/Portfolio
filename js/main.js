@@ -1,5 +1,8 @@
 const GITHUB_USERNAME = "Jordi098";
-const API_URL = "https://51.21.248.23:3000.execute-api.eu-north-1.amazonaws.com/github";
+const API_URL =
+    ["localhost", "127.0.0.1"].includes(location.hostname)
+        ? "http://localhost:3000/github"
+        : "https://ckku79crp6.execute-api.eu-north-1.amazonaws.com/github";
 
 const SKILLS = {
     frontend: [

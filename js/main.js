@@ -1,6 +1,5 @@
 const GITHUB_USERNAME = "Jordi098";
-// NOTE: This token is read-only and only has access to public data. It can be safely used in client-side code.
-const GITHUB_TOKEN = "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";
+const API_URL = "http://51.21.248.23:3000/github";
 
 const SKILLS = {
     frontend: [
@@ -21,13 +20,15 @@ const SKILLS = {
     ],
 };
 
-
 const el = (id) => document.getElementById(id);
 
 function escapeHtml(str) {
-    return str.replace(/[&<>"']/g, (m) => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;",
-        '"': "&quot;", "'": "&#039;"
+    return String(str).replace(/[&<>"']/g, (m) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
     }[m]));
 }
 
@@ -73,10 +74,8 @@ function repoCard(repo) {
 
 // ===== INIT =====
 el("year").textContent = new Date().getFullYear();
-
 el("ghUserText").textContent = GITHUB_USERNAME;
 el("allReposLink").href = `https://github.com/${GITHUB_USERNAME}`;
-
 
 const skillsWrap = el("skillsWrap");
 
@@ -114,7 +113,6 @@ function renderSkillSection(
   `;
 }
 
-
 skillsWrap.innerHTML = `
   <div class="grid gap-4 md:grid-cols-3">
     ${renderSkillSection("Frontend", SKILLS.frontend, "grid-cols-2", true)}
@@ -123,7 +121,6 @@ skillsWrap.innerHTML = `
   </div>
 `;
 
-
 async function loadPinned() {
     const status = el("projectsStatus");
     const grid = el("projectsGrid");
@@ -131,43 +128,51 @@ async function loadPinned() {
     status.textContent = "Pinned repos laden…";
 
     const query = `
-    query {
-      user(login: "${GITHUB_USERNAME}") {
-        pinnedItems(first: 6, types: REPOSITORY) {
-          nodes {
-            ... on Repository {
-              name
-              description
-              url
-              updatedAt
-              stargazerCount
-              primaryLanguage {
+      query($login: String!) {
+        user(login: $login) {
+          pinnedItems(first: 6, types: REPOSITORY) {
+            nodes {
+              ... on Repository {
                 name
+                description
+                url
+                updatedAt
+                stargazerCount
+                primaryLanguage {
+                  name
+                }
               }
             }
           }
         }
       }
-    }
-  `;
+    `;
 
     try {
-        const res = await fetch("https://api.github.com/graphql", {
+        const res = await fetch(API_URL, {
             method: "POST",
             headers: {
-                "Authorization": "Bearer " + GITHUB_TOKEN,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({query})
+            body: JSON.stringify({
+                query,
+                variables: {
+                    login: GITHUB_USERNAME
+                }
+            })
         });
 
         if (!res.ok) {
-            throw new Error("API error: " + res.status);
+            throw new Error("Backend error: " + res.status);
         }
 
         const data = await res.json();
 
-        const repos = data.data.user.pinnedItems.nodes;
+        if (data.errors) {
+            throw new Error(data.errors[0]?.message || "Onbekende GraphQL fout");
+        }
+
+        const repos = data.data?.user?.pinnedItems?.nodes || [];
 
         if (!repos.length) {
             status.textContent = "Geen pinned repos gevonden.";
@@ -175,20 +180,17 @@ async function loadPinned() {
         }
 
         grid.innerHTML = repos.map(repoCard).join("");
-
         status.classList.add("hidden");
         grid.classList.remove("hidden");
 
     } catch (err) {
-
         status.innerHTML = `
-      <div class="font-semibold">Fout bij laden</div>
-      <div class="text-sm mt-1">${escapeHtml(err.message)}</div>
-
-      <div class="text-sm mt-2 text-zinc-400">
-        Check of je token klopt en read:user heeft.
-      </div>
-    `;
+          <div class="font-semibold">Fout bij laden</div>
+          <div class="text-sm mt-1">${escapeHtml(err.message)}</div>
+          <div class="text-sm mt-2 text-zinc-400">
+            Check of je backend draait en CORS goed staat.
+          </div>
+        `;
     }
 }
 

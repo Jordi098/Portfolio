@@ -1,5 +1,5 @@
 const GITHUB_USERNAME = "Jordi098";
-const API_URL = "http://51.21.248.23:3000/github";
+const API_URL = "https://51.21.248.23:3000.execute-api.eu-north-1.amazonaws.com/github";
 
 const SKILLS = {
     frontend: [

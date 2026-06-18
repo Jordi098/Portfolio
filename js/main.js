@@ -36,46 +36,41 @@ function escapeHtml(str) {
 }
 
 function repoCard(repo) {
-    const updated = new Date(repo.updatedAt).toLocaleDateString();
+    const updated = new Date(repo.updatedAt).toLocaleDateString("nl-NL");
 
     return `
     <a href="${repo.url}" target="_blank" rel="noreferrer"
-      class="group rounded-2xl border border-orange-500/20
-             bg-gradient-to-br from-white/5 to-orange-500/5
-             p-5 transition-all hover:-translate-y-0.5
-             hover:from-white/10 hover:to-orange-500/10">
+      class="group surface flex min-h-56 flex-col rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-amber-300/30">
 
       <div class="flex items-start justify-between gap-3">
-        <h3 class="font-semibold text-zinc-100">${escapeHtml(repo.name)}</h3>
+        <h3 class="text-lg font-bold tracking-normal text-white">${escapeHtml(repo.name)}</h3>
 
-        <span class="text-xs border border-orange-400/20 bg-orange-500/10 text-orange-200
-                     px-2 py-1 rounded-full">
+        <span class="rounded-full border border-amber-300/20 bg-amber-300/10 px-2.5 py-1 text-xs font-medium text-amber-100">
           ★ ${repo.stargazerCount}
         </span>
       </div>
 
-      <p class="mt-2 text-sm text-zinc-200/90 line-clamp-2">
+      <p class="mt-3 line-clamp-3 text-sm leading-6 text-stone-300">
         ${repo.description ? escapeHtml(repo.description) : "Geen beschrijving."}
       </p>
 
-      <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-zinc-300">
+      <div class="mt-auto flex flex-wrap items-center gap-2 pt-5 text-xs text-stone-300">
         ${repo.primaryLanguage ? `
-          <span class="border border-orange-400/20 bg-orange-500/10 text-orange-200 px-2 py-1 rounded-full">
+          <span class="rounded-full border border-teal-300/20 bg-teal-300/10 px-2.5 py-1 font-medium text-teal-100">
             ${escapeHtml(repo.primaryLanguage.name)}
           </span>
         ` : ""}
 
-        <span class="text-zinc-400">Updated: ${updated}</span>
+        <span class="text-stone-400">Updated: ${updated}</span>
       </div>
 
-      <div class="mt-3 text-sm text-orange-200/90 opacity-80 group-hover:opacity-100">
+      <div class="mt-4 text-sm font-semibold text-amber-200 opacity-80 transition group-hover:opacity-100">
         Bekijk op GitHub →
       </div>
     </a>
   `;
 }
 
-// ===== INIT =====
 el("year").textContent = new Date().getFullYear();
 el("ghUserText").textContent = GITHUB_USERNAME;
 el("allReposLink").href = `https://github.com/${GITHUB_USERNAME}`;
@@ -91,22 +86,17 @@ function renderSkillSection(
     const textClass = wrap ? "whitespace-normal break-normal" : "whitespace-nowrap";
 
     return `
-    <div class="rounded-2xl border border-orange-500/20
-                bg-gradient-to-br from-white/5 to-orange-500/5
-                p-5 h-full flex flex-col transition-all
-                hover:from-white/10 hover:to-orange-500/10 hover:-translate-y-0.5">
-      <h3 class="text-lg font-semibold tracking-tight text-orange-200/90">${title}</h3>
+    <div class="surface flex h-full flex-col rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-amber-300/30">
+      <h3 class="text-lg font-bold tracking-normal text-white">${title}</h3>
 
       <div class="mt-4 grid gap-3 ${colsClass}">
         ${items.map(({name, icon}) => `
-          <div class="flex items-center gap-3 rounded-xl
-                      border border-orange-400/20 bg-orange-500/10
-                      px-4 py-3 transition-colors hover:bg-orange-500/15">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center">
-              <i class="${icon} text-3xl"></i>
+          <div class="flex min-h-16 items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition-colors hover:bg-white/10">
+            <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-stone-950/35">
+              <i class="${icon} text-2xl"></i>
             </div>
 
-            <span class="min-w-0 text-sm text-zinc-100 leading-snug ${textClass}">
+            <span class="min-w-0 text-sm font-medium leading-snug text-stone-100 ${textClass}">
               ${escapeHtml(name)}
             </span>
           </div>
@@ -128,7 +118,7 @@ async function loadPinned() {
     const status = el("projectsStatus");
     const grid = el("projectsGrid");
 
-    status.textContent = "Pinned repos laden…";
+    status.textContent = "Pinned repos laden...";
 
     const query = `
       query($login: String!) {
@@ -189,8 +179,8 @@ async function loadPinned() {
     } catch (err) {
         status.innerHTML = `
           <div class="font-semibold">Fout bij laden</div>
-          <div class="text-sm mt-1">${escapeHtml(err.message)}</div>
-          <div class="text-sm mt-2 text-zinc-400">
+          <div class="mt-1 text-sm">${escapeHtml(err.message)}</div>
+          <div class="mt-2 text-sm text-stone-400">
             Check of je backend draait en CORS goed staat.
           </div>
         `;

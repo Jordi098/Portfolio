@@ -3,153 +3,196 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Portfolio Jordi</title>
+    <meta name="description" content="Portfolio van Jordi Biever, full-stack developer."/>
+    <title>Jordi Biever | Full-stack developer</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --background: 20 14 10;
+            --foreground: 250 247 242;
+            --card: 32 24 18;
+            --border: 255 255 255;
+        }
+
         html {
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            font-family: "Instrument Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             scroll-behavior: smooth;
         }
 
-        :root {
-            --accent: 251 146 60;
+        body {
+            background:
+                radial-gradient(circle at 18% 12%, rgba(245, 158, 11, 0.22), transparent 28rem),
+                radial-gradient(circle at 82% 4%, rgba(20, 184, 166, 0.13), transparent 24rem),
+                linear-gradient(135deg, rgb(var(--background)), #090806 70%);
+        }
+
+        .mono {
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        .surface {
+            background: linear-gradient(145deg, rgba(var(--card), 0.86), rgba(255, 255, 255, 0.045));
+            border: 1px solid rgba(var(--border), 0.11);
+            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+        }
+
+        .hairline {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: linear-gradient(to bottom, black, transparent);
         }
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-zinc-100 selection:bg-orange-400/20 selection:text-white">
-<header class="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/60 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <a href="#" class="font-semibold tracking-tight">
-            <span class="text-orange-400 font-bold">Jordi</span><span class="text-zinc-400">Biever</span>
+<body class="min-h-screen text-stone-50 selection:bg-amber-400/25 selection:text-white">
+<div class="pointer-events-none fixed inset-0 hairline opacity-40"></div>
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#140e0a]/75 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+        <a href="#about" class="flex items-center gap-3 font-semibold tracking-tight" aria-label="Naar boven">
+            <span class="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/10 mono text-sm text-amber-200">JB</span>
+            <span class="hidden sm:inline">Jordi Biever</span>
         </a>
 
-        <nav class="hidden gap-6 md:flex text-sm text-zinc-300">
-            <a class="hover:text-white transition-colors" href="#about">Over mij</a>
-            <a class="hover:text-white transition-colors" href="#skills">Techstack</a>
-            <a class="hover:text-white transition-colors" href="#projects">Projecten</a>
-            <a class="hover:text-white transition-colors" href="#contact">Contact</a>
+        <nav class="hidden items-center gap-1 rounded-xl border border-white/10 bg-white/5 p-1 text-sm text-stone-300 md:flex">
+            <a class="rounded-lg px-3 py-2 transition-colors hover:bg-white/10 hover:text-white" href="#about">Over mij</a>
+            <a class="rounded-lg px-3 py-2 transition-colors hover:bg-white/10 hover:text-white" href="#skills">Techstack</a>
+            <a class="rounded-lg px-3 py-2 transition-colors hover:bg-white/10 hover:text-white" href="#projects">Projecten</a>
+            <a class="rounded-lg px-3 py-2 transition-colors hover:bg-white/10 hover:text-white" href="#contact">Contact</a>
         </nav>
-        
+
+        <a href="mailto:jordibiever@gmail.com" class="rounded-lg bg-amber-400 px-3 py-2 text-sm font-semibold text-stone-950 shadow-lg shadow-amber-950/30 transition hover:bg-amber-300">
+            Mail mij
+        </a>
     </div>
 </header>
 
-<main class="mx-auto max-w-6xl px-4">
-    <section id="about" class="py-14 md:py-20">
-        <div class="grid items-center gap-10 md:grid-cols-2">
-            <div>
-                <p class="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-orange-500/10 px-3 py-1 text-xs text-orange-200">
-                    Full-stack developer
-                </p>
+<main class="relative mx-auto max-w-6xl px-4">
+    <section id="about" class="grid min-h-[calc(100vh-4rem)] items-center gap-10 py-14 md:grid-cols-[1.15fr_0.85fr] md:py-20">
+        <div class="flex flex-col gap-7">
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="inline-flex items-center rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-xs font-medium text-amber-100">Full-stack developer</span>
+                <span class="inline-flex items-center rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1 text-xs font-medium text-teal-100">Rotterdam · beschikbaar voor stage/werk</span>
+            </div>
 
-                <h1 class="mt-3 text-3xl font-semibold tracking-tight md:text-5xl leading-tight">
-                    Hi, ik ben <span class="text-orange-400">Jordi</span><br>
-                    een full-stack developer die webapplicatie's bouwt<br>
-                    die mensen echt helpen.
-                </h1>
+            <div class="flex flex-col gap-5">
+                <h1 class="max-w-4xl text-4xl font-extrabold leading-[1.03] tracking-normal text-white md:text-6xl">Ik bouw webapplicaties die rustig werken, snel voelen en duidelijk zijn.</h1>
+                <p class="max-w-2xl text-base leading-7 text-stone-300 md:text-lg">Ik ben Jordi, een full-stack developer met focus op praktische oplossingen: nette interfaces, betrouwbare backends en code die je later nog begrijpt.</p>
+            </div>
 
-                <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="#projects"
-                       class="rounded-xl bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600 transition-all shadow-md shadow-orange-500/30 hover:scale-[1.02]">
-                        Bekijk projecten
-                    </a>
-                    <a href="#contact"
-                       class="rounded-xl border border-orange-400/40 px-4 py-2 text-sm text-orange-300 hover:bg-orange-500/10 transition-all">
-                        Contact
-                    </a>
+            <div class="flex flex-wrap gap-3">
+                <a href="#projects" class="rounded-lg bg-amber-400 px-4 py-2.5 text-sm font-semibold text-stone-950 shadow-lg shadow-amber-950/30 transition hover:-translate-y-0.5 hover:bg-amber-300">Bekijk projecten</a>
+                <a href="#contact" class="rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-stone-100 transition hover:-translate-y-0.5 hover:bg-white/10">Neem contact op</a>
+            </div>
+        </div>
+
+        <aside class="surface rounded-2xl p-5 md:p-6">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <p class="mono text-xs uppercase tracking-[0.22em] text-amber-200/80">Developer profile</p>
+                    <h2 class="mt-3 text-2xl font-bold tracking-normal text-white">Jordi Biever</h2>
+                </div>
+                <span class="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-medium text-emerald-100">Open to work</span>
+            </div>
+
+            <div class="mt-7 grid gap-3">
+                <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div class="text-sm text-stone-400">Frontend</div>
+                    <div class="mt-1 font-semibold text-white">HTML, CSS, JavaScript, Tailwind, React</div>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div class="text-sm text-stone-400">Backend</div>
+                    <div class="mt-1 font-semibold text-white">Node.js, Express, PHP</div>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div class="text-sm text-stone-400">Databases</div>
+                    <div class="mt-1 font-semibold text-white">MySQL, MongoDB</div>
                 </div>
             </div>
+        </aside>
+    </section>
 
-            <div class="rounded-3xl border border-orange-500/20 bg-gradient-to-br from-white/5 to-orange-500/5 p-6 hover:from-white/10 hover:to-orange-500/10 transition-all hover:-translate-y-0.5">
-                <div class="space-y-2 text-zinc-200">
-                    <div class="text-sm text-orange-200/80">Waar ik aan werk</div>
-                    <div>• Front-end: HTML, CSS, JS, Tailwind</div>
-                    <div>• Back-end: Node.js, Express, PHP</div>
-                    <div>• Databases: MySQL, MongoDB</div>
-                    <div>• Focus: Leren, groeien en impact maken</div>
-                </div>
+    <section class="border-t border-white/10 py-14">
+        <div class="grid gap-4 md:grid-cols-3">
+            <div class="surface rounded-2xl p-5">
+                <p class="mono text-xs uppercase tracking-[0.2em] text-stone-400">01</p>
+                <h2 class="mt-3 text-xl font-bold">Duidelijke interfaces</h2>
+                <p class="mt-2 text-sm leading-6 text-stone-300">Schermen die logisch scannen, ook op mobiel en bij terugkerend gebruik.</p>
+            </div>
+            <div class="surface rounded-2xl p-5">
+                <p class="mono text-xs uppercase tracking-[0.2em] text-stone-400">02</p>
+                <h2 class="mt-3 text-xl font-bold">Werkende backends</h2>
+                <p class="mt-2 text-sm leading-6 text-stone-300">API's, datamodellen en serverlogica met aandacht voor simpele onderhoudbaarheid.</p>
+            </div>
+            <div class="surface rounded-2xl p-5">
+                <p class="mono text-xs uppercase tracking-[0.2em] text-stone-400">03</p>
+                <h2 class="mt-3 text-xl font-bold">Leergierige uitvoering</h2>
+                <p class="mt-2 text-sm leading-6 text-stone-300">Snel leren, netjes opleveren en technische keuzes helder kunnen uitleggen.</p>
             </div>
         </div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="py-14 border-t border-white/5">
-        <h2 class="text-2xl font-semibold tracking-tight text-orange-300">Techstack</h2>
-        <div class="mt-6 flex flex-wrap gap-2" id="skillsWrap"></div>
+    <section id="skills" class="border-t border-white/10 py-14">
+        <div class="flex flex-col gap-3">
+            <span class="mono text-xs uppercase tracking-[0.22em] text-amber-200/80">Skills</span>
+            <h2 class="text-3xl font-bold tracking-normal text-white">Techstack</h2>
+        </div>
+        <div class="mt-7" id="skillsWrap"></div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="py-14 border-t border-white/5">
-        <div class="flex flex-wrap items-end justify-between gap-3">
-            <div>
-                <h2 class="text-2xl font-semibold tracking-tight text-orange-300">Projecten</h2>
-                <p class="mt-2 text-zinc-300">
-                    <span id="ghUserText" class="text-zinc-100 font-medium"></span>
-                </p>
+    <section id="projects" class="border-t border-white/10 py-14">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+            <div class="flex flex-col gap-3">
+                <span class="mono text-xs uppercase tracking-[0.22em] text-amber-200/80">GitHub</span>
+                <h2 class="text-3xl font-bold tracking-normal text-white">Projecten</h2>
+                <p class="max-w-2xl text-stone-300">Pinned repositories van <span id="ghUserText" class="font-semibold text-white"></span>, live opgehaald via de GitHub API.</p>
             </div>
 
-            <a id="allReposLink" class="text-sm text-orange-300 hover:text-orange-200 transition-colors" href="#"
-               target="_blank" rel="noreferrer">
-                Alle repos →
-            </a>
+            <a id="allReposLink" class="rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-stone-100 transition hover:bg-white/10" href="#" target="_blank" rel="noreferrer">Alle repos</a>
         </div>
 
-        <div class="mt-6">
-            <div id="projectsStatus"
-                 class="rounded-2xl border border-orange-500/20 bg-gradient-to-br from-white/5 to-orange-500/5 p-5 text-zinc-200 hover:from-white/10 hover:to-orange-500/10 transition-all hover:-translate-y-0.5">
-                Repos laden…
-            </div>
-
-            <div id="projectsGrid" class="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3 hidden"></div>
+        <div class="mt-7">
+            <div id="projectsStatus" class="surface rounded-2xl p-5 text-stone-200">Repos laden...</div>
+            <div id="projectsGrid" class="mt-5 grid hidden gap-5 md:grid-cols-2 lg:grid-cols-3"></div>
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="py-14 border-t border-white/5">
-        <h2 class="text-2xl font-semibold tracking-tight text-orange-300">Contact</h2>
+    <section id="contact" class="border-t border-white/10 py-14">
+        <div class="grid gap-6 md:grid-cols-[0.9fr_1.1fr]">
+            <div class="flex flex-col gap-3">
+                <span class="mono text-xs uppercase tracking-[0.22em] text-amber-200/80">Contact</span>
+                <h2 class="text-3xl font-bold tracking-normal text-white">Laten we praten.</h2>
+                <p class="text-stone-300">Ik sta open voor nieuwe uitdagingen, stages en projecten waar techniek echt iets oplost.</p>
+            </div>
 
-        <div class="mt-6 grid gap-4 md:grid-cols-2">
-            <div class="rounded-2xl border border-orange-500/20 bg-gradient-to-br from-white/5 to-orange-500/5 p-5 hover:from-white/10 hover:to-orange-500/10 transition-all hover:-translate-y-0.5">
-                <div class="text-sm text-orange-200/80">Email</div>
-                <a class="mt-1 block hover:underline decoration-orange-400/60 underline-offset-4"
-                   href="mailto:jordibiever@gmail.com">jordibiever@gmail.com</a>
-
-                <div class="mt-4 text-sm text-orange-200/80">LinkedIn</div>
-                <a class="mt-1 block hover:underline decoration-orange-400/60 underline-offset-4"
-                   href="https://www.linkedin.com/in/jordi-biever-b75481184/"
-                   onclick="return false;"
-                   title="Vervang door jouw LinkedIn URL">
-                    linkedin.com/in/jordi-biever
+            <div class="grid gap-4 sm:grid-cols-2">
+                <a class="surface rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-amber-300/30" href="mailto:jordibiever@gmail.com">
+                    <div class="text-sm text-stone-400">Email</div>
+                    <div class="mt-2 font-semibold text-white">jordibiever@gmail.com</div>
                 </a>
-
-                <div class="mt-4 text-sm text-orange-200/80">Telefoon</div>
-                <p class="mt-1 block hover:underline decoration-orange-400/60 underline-offset-4">
-                    <a href="tel:+31612111346">0612111346</a>
-                </p>
-            </div>
-
-            <div class="rounded-2xl border border-orange-500/20 bg-gradient-to-br from-white/5 to-orange-500/5 p-5 hover:from-white/10 hover:to-orange-500/10 transition-all hover:-translate-y-0.5">
-                <div class="text-sm text-orange-200/80">Snelle pitch</div>
-                <p class="mt-2 text-zinc-200">
-                    Ik vind het leuk om webapplicaties te bouwen die het werk van mensen
-                    makkelijker maken. Met mijn technische skills wil ik echte problemen
-                    oplossen. Ik sta altijd open voor nieuwe uitdagingen en kansen om te groeien
-                    als developer.
-                </p>
+                <a class="surface rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-amber-300/30" href="tel:+31612111346">
+                    <div class="text-sm text-stone-400">Telefoon</div>
+                    <div class="mt-2 font-semibold text-white">0612111346</div>
+                </a>
+                <a class="surface rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-amber-300/30 sm:col-span-2" href="https://www.linkedin.com/in/jordi-biever-b75481184/" target="_blank" rel="noreferrer">
+                    <div class="text-sm text-stone-400">LinkedIn</div>
+                    <div class="mt-2 font-semibold text-white">linkedin.com/in/jordi-biever</div>
+                </a>
             </div>
         </div>
     </section>
 </main>
 
-<footer class="border-t border-white/10 py-10 mt-10">
-    <div class="mx-auto max-w-6xl px-4 text-sm text-zinc-400">
-        © <span id="year">2026</span> Jordi.
+<footer class="relative border-t border-white/10 py-8">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 text-sm text-stone-400">
+        <span>© <span id="year">2026</span> Jordi Biever</span>
+        <a class="transition hover:text-white" href="#about">Terug naar boven</a>
     </div>
 </footer>
 
